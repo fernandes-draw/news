@@ -127,9 +127,12 @@ STORAGES = {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",  # <-- Deixe o padrão do Django
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
+
+# Se o seu projeto herdar configurações antigas, adicione também:
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 # Se usar a versão antiga, remova a linha do STATICFILES_STORAGE do whitenoise ou mude para:
 # STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
