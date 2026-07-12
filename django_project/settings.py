@@ -115,15 +115,23 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
+
+# 1. Defina onde o Django deve juntar todos os arquivos estáticos de produção
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# 2. Mude temporariamente o Storage para não exigir o manifesto rigoroso
+# Se o seu Django for a versão 4.2 ou superior, procure por STORAGES:
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",  # new
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",  # <-- Mudamos de Manifest para Compressed
     },
 }
+
+# Se o seu projeto usar a configuração antiga do Django (versões anteriores), mude esta linha:
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
