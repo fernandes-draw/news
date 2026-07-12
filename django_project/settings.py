@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    # "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -121,14 +121,18 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # 2. Mude temporariamente o Storage para não exigir o manifesto rigoroso
 # Se o seu Django for a versão 4.2 ou superior, procure por STORAGES:
+# Se usar o Django moderno (STORAGES):
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",  # <-- Mudamos de Manifest para Compressed
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",  # <-- Deixe o padrão do Django
     },
 }
+
+# Se usar a versão antiga, remova a linha do STATICFILES_STORAGE do whitenoise ou mude para:
+# STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 # Se o seu projeto usar a configuração antiga do Django (versões anteriores), mude esta linha:
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
